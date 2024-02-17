@@ -93,6 +93,31 @@ class TalentController extends BaseController {
     }
   }
 
+  async editTalentPhoto(req, res) {
+    const { talentId } = req.params;
+    const { talentProfileImage } = req.body;
+    try {
+      console.log("UPLOADDD PHOTO");
+      console.log("Image URL", talentProfileImage);
+      const updatedTalentImage = await this.model.update(
+        {
+          photo: talentProfileImage,
+        },
+        {
+          where: {
+            id: talentId,
+          },
+        }
+      );
+      return res.json(updatedTalentImage);
+    } catch (err) {
+      console.error("Error updating talent image:", err);
+      return res
+        .status(400)
+        .json({ error: true, msg: "Failed to update talent image" });
+    }
+  }
+
   // <------------------------ RESUME ------------------------ >
 
   async addResume(req, res) {
