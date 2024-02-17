@@ -26,6 +26,12 @@ class TalentRouter {
       this.talentController.editTalentName.bind(this.talentController)
     );
 
+    router.put(
+      "/:talentId/profileimage",
+      this.checkJwt,
+      this.talentController.editTalentPhoto.bind(this.talentController)
+    );
+
     // <------------------------ RESUME ------------------------ >
 
     router.post(
